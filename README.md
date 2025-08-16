@@ -41,7 +41,7 @@ You can switch between encryption and signature features using command-line argu
 ## References
 
 - [RSA暗号の仕組みとRustの実装](https://zenn.dev/mameta29/articles/1fa0dd67e18d7e)
-- [RSAの暗号と署名の違い ~Rustで実装してみた~](https://zenn.dev/mameta29/articles/25051a3a26c9bd)
+- [RSAの暗号と署名の違い ～Rustで実装してみた～](https://zenn.dev/mameta29/articles/25051a3a26c9bd)
 
 ## License
 
