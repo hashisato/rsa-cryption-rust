@@ -1,7 +1,3 @@
-extern crate rsa;
-extern crate rand;
-extern crate base64;
-
 use rsa::{RsaPrivateKey, RsaPublicKey};
 use rsa::pkcs1v15::Pkcs1v15Encrypt;
 use rand::rngs::OsRng;
