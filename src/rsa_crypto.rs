@@ -1,10 +1,43 @@
 use rsa::{RsaPrivateKey, RsaPublicKey};
 use rsa::pkcs1v15::Pkcs1v15Encrypt;
 use rand::rngs::OsRng;
-use base64::{engine::general_purpose, Engine as _};
-use std::io::{self, Write};
 
+/// Encrypts data using the given RSA public key.
+/// Returns the encrypted data as a Vec<u8> on success.
+pub fn encrypt(data: &[u8], public_key: &RsaPublicKey) -> Result<Vec<u8>, rsa::errors::Error> {
+    let mut rng = OsRng;
+    public_key.encrypt(&mut rng, Pkcs1v15Encrypt, data)
+}
+
+/// Decrypts data using the given RSA private key.
+/// Returns the decrypted data as a Vec<u8> on success.
+pub fn decrypt(encrypted_data: &[u8], private_key: &RsaPrivateKey) -> Result<Vec<u8>, rsa::errors::Error> {
+    private_key.decrypt(Pkcs1v15Encrypt, encrypted_data)
+}
+
+/// Provides a simple console-based demonstration of RSA encryption and decryption.
+///
+/// This function performs the following steps:
+/// 1. Prompts the user to input a message.
+/// 2. Generates a 2048-bit RSA key pair.
+/// 3. Optionally displays the generated keys.
+/// 4. Encrypts the input message using the public key.
+/// 5. Optionally displays the encrypted message (base64 encoded).
+/// 6. Decrypts the encrypted message using the private key.
+/// 7. Displays the decrypted message.
+///
+/// # Example
+/// ```
+/// rsa_console_crypto();
+/// ```
+///
+/// # Panics
+/// This function will panic if key generation, encryption, decryption,
+/// base64 encoding/decoding, or UTF-8 conversion fails.
 pub fn rsa_console_crypto() {
+    use base64::{engine::general_purpose, Engine as _};
+    use std::io::{self, Write};
+
     // 0. Get the message from user input
     print!("Input message: ");
     io::stdout().flush().unwrap();
@@ -29,11 +62,7 @@ pub fn rsa_console_crypto() {
     }
 
     // 2. Encrypt message
-    let encrypted_data = public_key.encrypt(
-        &mut rng,
-        Pkcs1v15Encrypt,
-        message.as_bytes(),
-    ).expect("Failed to encrypt");
+    let encrypted_data = encrypt(message.as_bytes(), &public_key).expect("Failed to encrypt");
     // Encode the encrypted data to base64 for display
     let encoded_encrypted_data = general_purpose::STANDARD.encode(&encrypted_data);
 
@@ -50,10 +79,7 @@ pub fn rsa_console_crypto() {
     let decoded_encrypted_data = general_purpose::STANDARD
         .decode(&encoded_encrypted_data)
         .expect("Failed to decode base64");
-    let decrypted_data = private_key.decrypt(
-        Pkcs1v15Encrypt,
-        &decoded_encrypted_data,
-    ).expect("Failed to decrypt");
+    let decrypted_data = decrypt(&decoded_encrypted_data, &private_key).expect("Failed to decrypt");
 
     // Display the decrypted message
     let decrypted_message = String::from_utf8(decrypted_data).expect("Failed to convert to string");
