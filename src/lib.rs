@@ -6,16 +6,15 @@ use rsa::{RsaPrivateKey, RsaPublicKey};
 use rsa::pkcs1v15::Pkcs1v15Encrypt;
 use rand::rngs::OsRng;
 use base64::{engine::general_purpose, Engine as _};
-use std::env;
+use std::io::{self, Write};
 
 pub fn rsa_console_crypto() {
-    // 0. Get the message from command line arguments
-    let args: Vec<String> = env::args().collect();
-    let message = if args.len() > 1 {
-        &args[1]
-    } else {
-        "There is no message!"
-    };
+    // 0. Get the message from user input
+    print!("Input message: ");
+    io::stdout().flush().unwrap();
+    let mut message = String::new();
+    io::stdin().read_line(&mut message).expect("Failed to read line");
+    let message = message.trim();
 
     // 1. Generate keys
     let mut rng = OsRng;
