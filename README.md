@@ -1,4 +1,4 @@
-# rsa-encryption-decryption
+# rsa-cryption-rust
 
 ## Overview
 
