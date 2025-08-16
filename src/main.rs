@@ -1,3 +1,6 @@
+use rsa_encryption_decryption::rsa_console_crypto;
+
 fn main() {
-    println!("Hello, world!");
+    // Call the RSA console crypto function from the library
+    rsa_console_crypto();
 }
