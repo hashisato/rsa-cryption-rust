@@ -14,15 +14,15 @@ You can easily switch between encryption and signature features using command-li
 
 ### Build & Run
 
+Runs the encryption/decryption demo.
 ```sh
 cargo run -- crypto
 ```
-Runs the encryption/decryption demo.
 
+Runs the signature/verification demo.
 ```sh
 cargo run -- signature
 ```
-Runs the signature/verification demo.
 
 ## Project Structure
 
