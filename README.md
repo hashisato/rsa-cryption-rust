@@ -1,37 +1,48 @@
 # rsa-encryption-decryption
 
-This repository demonstrates RSA encryption/decryption and digital signature in Rust.  
-You can easily switch between encryption and signature features using command-line arguments.
+## Overview
 
-## Features
+This repository provides sample implementations of RSA encryption/decryption and digital signature in Rust.  
+You can switch between encryption and signature features using command-line arguments.
 
-- RSA encryption and decryption
-- RSA digital signature and verification
-- Interactive console input for messages
-- Modular code structure for clarity
+## Directory Structure
+
+- `src/rsa_crypto.rs`  
+  RSA encryption and decryption logic
+- `src/rsa_signature.rs`  
+  RSA digital signature and verification logic
+- `src/main.rs`  
+  Command-line interface for feature selection
+- `src/lib.rs`  
+  Module definitions
 
 ## Usage
 
-### Build & Run
+1. Make sure you have Rust installed on your system.
+2. Clone this repository and navigate to the project directory.
+3. Run the following commands:
 
-Runs the encryption/decryption demo.
-```sh
-cargo run -- crypto
-```
+   - To run the encryption/decryption demo:
+     ```sh
+     cargo run -- crypto
+     ```
 
-Runs the signature/verification demo.
-```sh
-cargo run -- signature
-```
+   - To run the signature/verification demo:
+     ```sh
+     cargo run -- signature
+     ```
 
-## Project Structure
+## Purpose
 
-- `src/rsa_crypto.rs` – RSA encryption/decryption logic
-- `src/rsa_signature.rs` – RSA signature/verification logic
-- `src/main.rs` – Command-line interface
-- `src/lib.rs` – Module definitions
+- To learn the basics of RSA cryptography in Rust
+- To practice modular Rust programming
+- To provide interactive console-based demos for encryption and digital signatures
 
 ## References
 
 - [Implementing RSA encryption in Rust](https://zenn.dev/mameta29/articles/1fa0dd67e18d7e)
 - [Implementing RSA signature in Rust](https://zenn.dev/mameta29/articles/25051a3a26c9bd)
+
+## License
+
+This repository is licensed under the MIT License.
