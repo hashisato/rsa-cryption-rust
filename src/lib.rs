@@ -13,5 +13,5 @@
 //!
 //! See each module's documentation for details.
 
-pub mod rsa_crypto;
+pub mod rsa_cryption;
 pub mod rsa_signature;
