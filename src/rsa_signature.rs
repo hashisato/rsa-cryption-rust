@@ -4,7 +4,6 @@ use rand::rngs::OsRng;
 use sha2::Sha256;
 use base64::{engine::general_purpose, Engine as _};
 use signature::{Signer, Verifier, SignatureEncoding};
-use std::convert::TryFrom;
 use std::io::{self, Write};
 
 pub fn rsa_console_signature() {
@@ -32,7 +31,7 @@ pub fn rsa_console_signature() {
     }
 
     // 2. Generate signature (recommended API)
-    let signing_key = SigningKey::<Sha256>::new_unprefixed(private_key.clone());
+    let signing_key = SigningKey::<Sha256>::new_unprefixed(private_key);
     let signature = signing_key.sign(message.as_bytes());
     let encoded_signature = general_purpose::STANDARD.encode(signature.to_bytes());
 
