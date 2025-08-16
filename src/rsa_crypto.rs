@@ -1,7 +1,3 @@
-extern crate rsa;
-extern crate rand;
-extern crate base64;
-
 use rsa::{RsaPrivateKey, RsaPublicKey};
 use rsa::pkcs1v15::Pkcs1v15Encrypt;
 use rand::rngs::OsRng;
@@ -40,7 +36,9 @@ pub fn rsa_console_crypto() {
     ).expect("Failed to encrypt");
     // Encode the encrypted data to base64 for display
     let encoded_encrypted_data = general_purpose::STANDARD.encode(&encrypted_data);
-    print!("Displayed encrypted message? (y/n): ");
+
+    // Display the encrypted message (ask user for permission)
+    print!("Display encrypted message? (y/n): ");
     io::stdout().flush().unwrap();
     let mut show_encrypted = String::new();
     io::stdin().read_line(&mut show_encrypted).expect("Failed to read line");
